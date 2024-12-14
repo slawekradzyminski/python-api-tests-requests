@@ -2,51 +2,62 @@ import pytest
 import requests
 
 def test_get_all_posts(posts_url):
-    given = "When requesting all posts"
-    when = requests.get(posts_url)
-    then = when.json()
+    # when
+    response = requests.get(posts_url)
     
-    assert when.status_code == 200
-    assert len(then) == 100
-    assert all(isinstance(post, dict) for post in then)
+    # then
+    json = response.json()
+    assert response.status_code == 200
+    assert len(json) == 100
+    assert all(isinstance(post, dict) for post in json)
         
 def test_get_single_post(posts_url):
-    given = "When requesting a single post"
+    # given
     post_id = 1
-    when = requests.get(f"{posts_url}/{post_id}")
-    then = when.json()
     
-    assert when.status_code == 200
-    assert then["id"] == post_id
-    assert "title" in then
-    assert "body" in then
-    assert "userId" in then
+    # when
+    response = requests.get(f"{posts_url}/{post_id}")
+    
+    # then
+    json = response.json()
+    assert response.status_code == 200
+    assert json["id"] == post_id
+    assert "title" in json
+    assert "body" in json
+    assert "userId" in json
         
 def test_create_post(posts_url, sample_post):
-    given = "When creating a new post"
-    when = requests.post(posts_url, json=sample_post)
-    then = when.json()
+    # when
+    response = requests.post(posts_url, json=sample_post)
     
-    assert when.status_code == 201
-    assert then["title"] == sample_post["title"]
-    assert then["body"] == sample_post["body"]
-    assert then["userId"] == sample_post["userId"]
-    assert "id" in then
+    # then
+    json = response.json()
+    assert response.status_code == 201
+    assert json["title"] == sample_post["title"]
+    assert json["body"] == sample_post["body"]
+    assert json["userId"] == sample_post["userId"]
+    assert "id" in json
         
 def test_update_post(posts_url, sample_post):
-    given = "When updating a post"
+    # given
     post_id = 1
-    when = requests.put(f"{posts_url}/{post_id}", json=sample_post)
-    then = when.json()
     
-    assert when.status_code == 200
-    assert then["id"] == post_id
-    assert then["title"] == sample_post["title"]
-    assert then["body"] == sample_post["body"]
+    # when
+    response = requests.put(f"{posts_url}/{post_id}", json=sample_post)
+    
+    # then
+    json = response.json()
+    assert response.status_code == 200
+    assert json["id"] == post_id
+    assert json["title"] == sample_post["title"]
+    assert json["body"] == sample_post["body"]
         
 def test_delete_post(posts_url):
-    given = "When deleting a post"
+    # given
     post_id = 1
-    when = requests.delete(f"{posts_url}/{post_id}")
     
-    assert when.status_code == 200 
+    # when
+    response = requests.delete(f"{posts_url}/{post_id}")
+    
+    # then
+    assert response.status_code == 200 
