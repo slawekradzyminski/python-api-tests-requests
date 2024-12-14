@@ -29,7 +29,7 @@ jobs:
       - name: Upload test report
         uses: actions/upload-artifact@v4
         with:
-          name: test-report
+          name: test-report-312
           path: report_312.html
 
   test3-13:
@@ -55,6 +55,6 @@ jobs:
       - name: Upload test report
         uses: actions/upload-artifact@v4
         with:
-          name: test-report
+          name: test-report-313
           path: report_313.html
 
