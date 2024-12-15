@@ -26,7 +26,6 @@ pipeline {
                                 reportDir: '.',
                                 reportFiles: 'report_313.html',
                                 reportName: 'Python 3.13 Test Report',
-                                sandbox: true,
                                 useWrapperFileDirectly: false
                             ])
                         }
@@ -55,7 +54,6 @@ pipeline {
                                 reportDir: '.',
                                 reportFiles: 'report_312.html',
                                 reportName: 'Python 3.12 Test Report',
-                                sandbox: true,
                                 useWrapperFileDirectly: false
                             ])
                         }
